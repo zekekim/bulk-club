@@ -1,10 +1,10 @@
 #include "Sale.h"
 
-Sale::Sale():datePurchased(Date{"ERROR",0,0}), customer(0), item("Error"), quantity(0)
+Sale::Sale():datePurchased(Date{0,0,0}), customer(0), item(""), price(0.0), quantity(0)
 {
 }
 
-Sale::Sale(Date datePurchased, int customer, string item, int quantity):datePurchased(datePurchased),customer(customer),item(item),quantity(quantity)
+Sale::Sale(Date datePurchased, int customer, string item, double price, int quantity):datePurchased(datePurchased),customer(customer),item(item),price(price), quantity(quantity)
 {
 }
 

@@ -7,13 +7,14 @@
 using namespace std;
 
 class Sale{
+public:
     Date datePurchased;
     int customer;
     string item;
+    double price;
     int quantity;
-public:
     Sale();
-    Sale(Date datePurchased, int customer, string item, int quantity);
+    Sale(Date datePurchased, int customer, string item, double price, int quantity);
     bool isDate(Date date);
     int getCustomer();
 };

@@ -7,14 +7,11 @@ using namespace std;
 
 struct Date
 {
-    string month;
+    int month;
     int date;
     int year;
 };
 
-bool operator==(const Date& lhs, const Date& rhs)
-{
-    return (lhs.month == rhs.month) && (lhs.date == rhs.date) && (lhs.year == rhs.year);
-}
+bool operator==(const Date& lhs, const Date& rhs);
 
 #endif // DATE_H

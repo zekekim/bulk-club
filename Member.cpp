@@ -1,6 +1,6 @@
 #include "Member.h"
 
-Member::Member():name(""),number(0),type(0),expiration(Date{"",0,0}),total(0.0),rebate(0.0)
+Member::Member():name(""),number(0),type(0),expiration(Date{0,0,0}),total(0.0),rebate(0.0)
 {
 }
 

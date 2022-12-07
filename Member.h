@@ -7,14 +7,13 @@
 using namespace std;
 
 class Member{
+public:
     string name;
     int number;
     int type;
     Date expiration;
     double total;
     double rebate;
-
-public:
     Member();
     Member(string name, int number, int type, Date expiration, double total, double rebate);
     bool isName(string name);
