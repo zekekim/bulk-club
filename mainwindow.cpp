@@ -17,19 +17,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     QTabWidget *tabWidget = ui->tabWidget;
 
-    SalesReport *salesReport = new SalesReport(parent);
+    SalesReport *salesReport = new SalesReport(this);
     tabWidget->addTab(salesReport, "Sales Report");
 
-    MemberPurchases *memberPurchases = new MemberPurchases(parent);
+    MemberPurchases *memberPurchases = new MemberPurchases(this);
     tabWidget->addTab(memberPurchases, "Member Purchases");
 
-    ItemRevenue *itemRevenue = new ItemRevenue(parent);
+    ItemRevenue *itemRevenue = new ItemRevenue(this);
     tabWidget->addTab(itemRevenue, "Item Revenue");
 
-    ExecutiveRebate *executiveRebate = new ExecutiveRebate(parent);
+    ExecutiveRebate *executiveRebate = new ExecutiveRebate(this);
     tabWidget->addTab(executiveRebate, "Executive Rebate");
 
-    ExpiringMemberships *expiringMemberships = new ExpiringMemberships(parent);
+    ExpiringMemberships *expiringMemberships = new ExpiringMemberships(this);
     tabWidget->addTab(expiringMemberships, "Expiring Memberships");
 
     tabWidget->setCurrentIndex(0);
@@ -37,17 +37,23 @@ MainWindow::MainWindow(QWidget *parent)
     QStackedWidget *stackedWidget = ui->stackedWidget;
     stackedWidget->insertWidget(0, tabWidget);
 
-    ManageMembers *manageMembers = new ManageMembers(parent);
+    ManageMembers *manageMembers = new ManageMembers(this);
     stackedWidget->insertWidget(1, manageMembers);
 
-    CreatePurchase *createPurchase = new CreatePurchase(parent);
+    CreatePurchase *createPurchase = new CreatePurchase(this);
     stackedWidget->insertWidget(2, createPurchase);
 
-    ManageInventory *manageInventory = new ManageInventory(parent);
+    ManageInventory *manageInventory = new ManageInventory(this);
     stackedWidget->insertWidget(3, manageInventory);
 
     stackedWidget->setCurrentIndex(0);
 
+    QStackedWidget *stackedWidget2 = ui->stackedWidget_2;
+//    Login *login = new Login(this);
+//    stackedWidget2->insertWidget(1, login);
+
+//    stackedWidget2->setCurrentIndex(1);
+    stackedWidget2->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
