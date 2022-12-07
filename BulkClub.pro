@@ -9,14 +9,47 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    createpurchase.cpp \
+    executiverebate.cpp \
+    expiringmemberships.cpp \
+    itemrevenue.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    manageinventory.cpp \
+    manageinventoryadd.cpp \
+    manageinventorydelete.cpp \
+    manageinventoryedit.cpp \
+    managemembers.cpp \
+    memberpurchases.cpp \
+    salesreport.cpp
 
 HEADERS += \
-    mainwindow.h
+    createpurchase.h \
+    executiverebate.h \
+    expiringmemberships.h \
+    itemrevenue.h \
+    mainwindow.h \
+    manageinventory.h \
+    manageinventoryadd.h \
+    manageinventorydelete.h \
+    manageinventoryedit.h \
+    managemembers.h \
+    memberpurchases.h \
+    salesreport.h
 
 FORMS += \
-    mainwindow.ui
+    createpurchase.ui \
+    executiverebate.ui \
+    expiringmemberships.ui \
+    itemrevenue.ui \
+    mainwindow.ui \
+    manageinventory.ui \
+    manageinventoryadd.ui \
+    manageinventorydelete.ui \
+    manageinventoryedit.ui \
+    managemembers.ui \
+    memberpurchases.ui \
+    salesreport.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
