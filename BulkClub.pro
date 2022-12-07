@@ -14,8 +14,20 @@ SOURCES += \
     Member.cpp \
     Sale.cpp \
     StoreDashboard.cpp \
+    createpurchase.cpp \
+    executiverebate.cpp \
+    expiringmemberships.cpp \
+    itemrevenue.cpp \
+    login.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    manageinventory.cpp \
+    manageinventoryadd.cpp \
+    manageinventorydelete.cpp \
+    manageinventoryedit.cpp \
+    managemembers.cpp \
+    memberpurchases.cpp \
+    salesreport.cpp
 
 HEADERS += \
     Date.h \
@@ -24,9 +36,34 @@ HEADERS += \
     Sale.h \
     StoreDashboard.h \
     mainwindow.h
+    createpurchase.h \
+    executiverebate.h \
+    expiringmemberships.h \
+    itemrevenue.h \
+    login.h \
+    mainwindow.h \
+    manageinventory.h \
+    manageinventoryadd.h \
+    manageinventorydelete.h \
+    manageinventoryedit.h \
+    managemembers.h \
+    memberpurchases.h \
+    salesreport.h
 
 FORMS += \
-    mainwindow.ui
+    createpurchase.ui \
+    executiverebate.ui \
+    expiringmemberships.ui \
+    itemrevenue.ui \
+    login.ui \
+    mainwindow.ui \
+    manageinventory.ui \
+    manageinventoryadd.ui \
+    manageinventorydelete.ui \
+    manageinventoryedit.ui \
+    managemembers.ui \
+    memberpurchases.ui \
+    salesreport.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
