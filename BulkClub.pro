@@ -13,6 +13,7 @@ SOURCES += \
     executiverebate.cpp \
     expiringmemberships.cpp \
     itemrevenue.cpp \
+    login.cpp \
     main.cpp \
     mainwindow.cpp \
     manageinventory.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     executiverebate.h \
     expiringmemberships.h \
     itemrevenue.h \
+    login.h \
     mainwindow.h \
     manageinventory.h \
     manageinventoryadd.h \
@@ -42,6 +44,7 @@ FORMS += \
     executiverebate.ui \
     expiringmemberships.ui \
     itemrevenue.ui \
+    login.ui \
     mainwindow.ui \
     manageinventory.ui \
     manageinventoryadd.ui \
