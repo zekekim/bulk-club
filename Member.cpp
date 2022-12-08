@@ -21,10 +21,15 @@ bool Member::isNumber(int number)
 
 double Member::getRebate()
 {
+    this->rebate = rebateRate * this->total;
     return rebate;
 }
 
 Date Member::getExpiration()
 {
     return expiration;
+}
+
+double Member::getTotalRevenue() {
+    return (1.0 + taxRate) * total;
 }
