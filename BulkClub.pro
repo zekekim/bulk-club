@@ -35,7 +35,7 @@ HEADERS += \
     Member.h \
     Sale.h \
     StoreDashboard.h \
-    mainwindow.h
+    mainwindow.h \
     createpurchase.h \
     executiverebate.h \
     expiringmemberships.h \
@@ -79,3 +79,6 @@ DISTFILES += \
     day6.txt \
     day7.txt \
     warehouse-shoppers.txt
+
+RESOURCES += \
+    Resources.qrc

@@ -1,10 +1,10 @@
 #include "Member.h"
 
-Member::Member():name(""),number(0),type(0),expiration(Date{0,0,0}),total(0.0),rebate(0.0)
+Member::Member():name(""),number(0),type(""),expiration(Date{0,0,0}),total(0.0),rebate(0.0)
 {
 }
 
-Member::Member(string name, int number, int type, Date expiration, double total, double rebate):name(name),number(number),type(type),expiration(expiration),total(total),rebate(rebate)
+Member::Member(string name, int number, string type, Date expiration, double total, double rebate):name(name),number(number),type(type),expiration(expiration),total(total),rebate(rebate)
 {
 }
 

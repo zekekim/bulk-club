@@ -5,29 +5,39 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
-#include "Date.h"
 #include "Item.h"
 #include "Member.h"
 #include "Sale.h"
 #include <fstream>
 #include <sstream>
+#include <QString>
 
 using namespace std;
 
 class StoreDashboard{
-public:
-    vector<Item> inventory;
-    vector<Member> members;
-    vector<Sale> sales;
     StoreDashboard();
+public:
+    static StoreDashboard *instance;
+    vector<Item> *inventory;
+    vector<Member> *members;
+    vector<Sale> *sales;
+    static StoreDashboard *getInstance() {
+      if (!instance)
+      instance = new StoreDashboard;
+      return instance;
+    }
     void addSale(Sale sale);
     void addItem(bool isAdmin, Item item);
     void updateItem(bool isAdmin, string item, double price);
     void deleteItem(bool isAdmin, string item);
-    Item findItem(string item);
+    double getRevenueTotal();
+    Item *findItem(string item);
+    Member *findMember(int member);
     void addMember(bool isAdmin, Member member);
     void deleteMember(bool isAdmin, int member);
-    void readDayFile(string fileName);
+    int getExecutiveCount();
+    int getRegularCount();
+    void readDayFile(QString fileName);
     void readMemberFile();
 };
 

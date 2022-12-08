@@ -10,12 +10,12 @@ class Member{
 public:
     string name;
     int number;
-    int type;
+    string type;
     Date expiration;
     double total;
     double rebate;
     Member();
-    Member(string name, int number, int type, Date expiration, double total, double rebate);
+    Member(string name, int number, string type, Date expiration, double total, double rebate);
     bool isName(string name);
     bool isNumber(int number);
     double getRebate();
