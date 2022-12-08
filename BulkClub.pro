@@ -35,7 +35,7 @@ HEADERS += \
     Member.h \
     Sale.h \
     StoreDashboard.h \
-    mainwindow.h
+    mainwindow.h \
     createpurchase.h \
     executiverebate.h \
     expiringmemberships.h \

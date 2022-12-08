@@ -6,6 +6,9 @@
 
 using namespace std;
 
+const double rebateRate = 0.02;
+const double taxRate = 7.75;
+
 class Member{
 public:
     string name;
@@ -20,6 +23,7 @@ public:
     bool isNumber(int number);
     double getRebate();
     Date getExpiration();
+    double getTotalRevenue();
 };
 
 #endif // MEMBER_H
