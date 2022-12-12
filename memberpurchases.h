@@ -2,6 +2,7 @@
 #define MEMBERPURCHASES_H
 
 #include <QWidget>
+#include "StoreDashboard.h"
 
 namespace Ui {
 class MemberPurchases;
@@ -15,8 +16,15 @@ public:
     explicit MemberPurchases(QWidget *parent = nullptr);
     ~MemberPurchases();
 
+private slots:
+    void on_comboBox_currentIndexChanged(int index);
+
+
+    void on_lineEdit_editingFinished();
+
 private:
     Ui::MemberPurchases *ui;
+    void displayTable(vector<Member> members, StoreDashboard *store);
 };
 
 #endif // MEMBERPURCHASES_H

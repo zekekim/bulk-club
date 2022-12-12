@@ -69,7 +69,7 @@ void SalesReport::displayTable(vector<Sale> sales, StoreDashboard *store)
 
         }
     }
-    QString revenue = QString::fromStdString(to_string(store->getRevenueTotal())).replace("0000","");
+    QString revenue = QString::fromStdString(to_string(store->getRevenueTotal(sales))).replace("0000","");
     QString executiveCount = QString::fromStdString(to_string(store->getExecutiveCount()));
     QString regularCount = QString::fromStdString(to_string(store->getRegularCount()));
     ui->revenueCount->setText("$" + revenue);
@@ -87,11 +87,15 @@ void SalesReport::on_dateEdit_userDateChanged(const QDate &date)
     int day = date.day();
     int year = date.year();
     Date selectedDate{month,day,year};
-    for (auto i = sales.begin(); i != sales.end(); ++i)
+    for (auto i = sales.begin(); i != sales.end();)
     {
         if (!i->isDate(selectedDate))
         {
             sales.erase(i);
+        }
+        else
+        {
+            ++i;
         }
     }
     displayTable(sales, store);
@@ -102,29 +106,39 @@ void SalesReport::on_comboBox_currentIndexChanged(int index)
 {
     StoreDashboard *store = store->getInstance();
     vector<Sale> sales = *store->sales;
-    vector<Member> members = *store->members;
-    for (auto i = sales.begin(); i != sales.end(); ++i)
+    for (auto i = sales.begin(); i != sales.end();)
     {
-        if (!store->findMember(i->customer))
+        Member* member = store->findMember(i->customer);
+        if (member == NULL)
         {
             qDebug() << "ERROR";
         }
-        else if ((store->findMember(i->customer)->type == "Executive"))
+        else if (member->type == "Executive")
         {
             if (index == 2)
             {
-
+                qDebug() << "ERASING EXEC: " << QString::fromStdString(member->name);
                 sales.erase(i);
             }
+            else
+            {
+                ++i;
+            }
         }
-        else if ((store->findMember(i->customer)->type == "Regular"))
+        else if (member->type == "Regular")
         {
             if (index == 1)
             {
+                qDebug() << "ERASING REGULAR: " << QString::fromStdString(member->name);
                 sales.erase(i);
+            }
+            else
+            {
+                ++i;
             }
         }
     }
+    qDebug() << "HERE";
     displayTable(sales, store);
 }
 

@@ -18,6 +18,8 @@ public:
     Member(string name, int number, string type, Date expiration, double total, double rebate);
     bool isName(string name);
     bool isNumber(int number);
+    void addPurchase(double number);
+    double getTotalWithTax();
     double getRebate();
     Date getExpiration();
 };

@@ -2,6 +2,7 @@
 #define EXPIRINGMEMBERSHIPS_H
 
 #include <QWidget>
+#include "StoreDashboard.h"
 
 namespace Ui {
 class ExpiringMemberships;
@@ -15,8 +16,12 @@ public:
     explicit ExpiringMemberships(QWidget *parent = nullptr);
     ~ExpiringMemberships();
 
+private slots:
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::ExpiringMemberships *ui;
+    void setTable(vector<Member> members);
 };
 
 #endif // EXPIRINGMEMBERSHIPS_H

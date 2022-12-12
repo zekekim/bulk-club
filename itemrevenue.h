@@ -15,6 +15,9 @@ public:
     explicit ItemRevenue(QWidget *parent = nullptr);
     ~ItemRevenue();
 
+private slots:
+    void on_lineEdit_editingFinished();
+
 private:
     Ui::ItemRevenue *ui;
 };

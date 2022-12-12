@@ -30,9 +30,10 @@ public:
     void addItem(bool isAdmin, Item item);
     void updateItem(bool isAdmin, string item, double price);
     void deleteItem(bool isAdmin, string item);
-    double getRevenueTotal();
+    double getRevenueTotal(vector<Sale> sales);
     Item *findItem(string item);
     Member *findMember(int member);
+    double getMembersTotal(vector<Member> members);
     void addMember(bool isAdmin, Member member);
     void deleteMember(bool isAdmin, int member);
     int getExecutiveCount();

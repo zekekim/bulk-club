@@ -10,20 +10,6 @@ StoreDashboard::StoreDashboard()
 }
 
 
-void StoreDashboard::addSale(Sale sale)
-{
-    sales->push_back(sale);
-}
-
-
-void StoreDashboard::addItem(bool isAdmin, Item item)
-{
-    if (!isAdmin)
-    {
-        return;
-    }
-    inventory->push_back(item);
-}
 
 void StoreDashboard::updateItem(bool isAdmin, string item, double price)
 {
@@ -57,7 +43,7 @@ Item* StoreDashboard::findItem(string item)
 {
     for (auto i = inventory->begin(); i != inventory->end(); ++i)
     {
-        if (i->isName(item))
+        if (i->name == item)
         {
             return &*i;
         }
@@ -65,13 +51,41 @@ Item* StoreDashboard::findItem(string item)
     return NULL;
 }
 
-double StoreDashboard::getRevenueTotal()
+void StoreDashboard::addItem(bool isAdmin, Item item)
+{
+    if (!isAdmin)
+    {
+        return;
+    }
+    if (findItem(item.name) != NULL)
+    {
+        findItem(item.name)->quantity += item.quantity;
+    }
+    else
+    {
+        inventory->push_back(item);
+    }
+}
+
+
+
+double StoreDashboard::getRevenueTotal(vector<Sale> sales)
 {
     double total = 0.0;
-    for (auto i = inventory->begin(); i != inventory->end(); ++i)
+    for (auto i = sales.begin(); i != sales.end(); ++i)
     {
         double item = i->price * i->quantity;
         total += item;
+    }
+    return total;
+}
+
+double StoreDashboard::getMembersTotal(vector<Member> members)
+{
+    double total = 0.0;
+    for (auto i = members.begin(); i != members.end(); ++i)
+    {
+        total += i->total;
     }
     return total;
 }
@@ -94,6 +108,7 @@ Member* StoreDashboard::findMember(int member)
             return &*i;
         }
     }
+    return NULL;
 }
 
 void StoreDashboard::deleteMember(bool isAdmin, int member)
@@ -109,6 +124,13 @@ void StoreDashboard::deleteMember(bool isAdmin, int member)
             members->erase(i);
         }
     }
+}
+void StoreDashboard::addSale(Sale sale)
+{
+    int customer = sale.customer;
+    Member *member = findMember(customer);
+    sales->push_back(sale);
+    member->addPurchase(sale.price * sale.quantity);
 }
 
 int StoreDashboard::getExecutiveCount()
@@ -188,15 +210,8 @@ void StoreDashboard::readDayFile(QString fileName)
                 Sale sale = Sale(date, memberNumber, name, price, quantity);
                 addSale(sale);
                 Item item = Item(name, quantity, price * quantity, price);
-               Item * finditem = findItem(name);
-                if (finditem != NULL)
-                {
-                    finditem-> quantity = finditem->quantity + quantity;
-                }
-                else
-                {
-                   addItem(true, item);
-                }
+                addItem(true,item);
+                qDebug() << "SALE: " << QString::fromStdString(findMember(memberNumber)->name);
                 index = 0;
             }
 
@@ -257,6 +272,8 @@ void StoreDashboard::readMemberFile()
                 int year = stoi(list[2].replace("\r\n", "").toStdString());
                 date = Date{month,day ,year};
                 members->push_back(Member(name,id,type,date,0.0,0.0));
+                qDebug() << "MEMBER: " << QString::fromStdString(name);
+                qDebug() << "TYPE" << QString::fromStdString(type);
                 index = 0;
             }
         }

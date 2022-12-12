@@ -19,6 +19,17 @@ bool Member::isNumber(int number)
     return this->number == number;
 }
 
+void Member::addPurchase(double number)
+{
+    total += number * (1.00 / 1.0775);
+    rebate = total * 0.02;
+}
+
+double Member::getTotalWithTax()
+{
+    return total * 1.0775;
+}
+
 double Member::getRebate()
 {
     return rebate;
