@@ -93,24 +93,72 @@ QGroupBox {
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit">
-        <property name="plainText">
-         <string>Total Revenue: $1000</string>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string/>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Revenue:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="revenueCount">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit_2">
-        <property name="plainText">
-         <string>Executive Customers: 100</string>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string/>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Executives:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="executiveCount">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit_3">
-        <property name="plainText">
-         <string>Regular Customers: 1000</string>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string/>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Regulars:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="regularCount">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

@@ -82,3 +82,6 @@ DISTFILES += \
     day6.txt \
     day7.txt \
     warehouse-shoppers.txt
+
+RESOURCES += \
+    Resources.qrc

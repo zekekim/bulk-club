@@ -1,22 +1,15 @@
 #include "StoreDashboard.h"
+#include <QDebug>
+#include <QFile>
 
 StoreDashboard::StoreDashboard()
 {
+    inventory = new vector<Item>;
+    sales = new vector<Sale>;
+    members = new vector<Member>;
 }
 
-void StoreDashboard::addSale(Sale sale)
-{
-    sales.push_back(sale);
-}
 
-void StoreDashboard::addItem(bool isAdmin, Item item)
-{
-    if (!isAdmin)
-    {
-        return;
-    }
-    inventory.push_back(item);
-}
 
 void StoreDashboard::updateItem(bool isAdmin, string item, double price)
 {
@@ -24,7 +17,7 @@ void StoreDashboard::updateItem(bool isAdmin, string item, double price)
     {
         return;
     }
-    for (auto i = inventory.begin(); i != inventory.end(); ++i)
+    for (auto i = inventory->begin(); i != inventory->end(); ++i)
     {
         if (i->isName(item))
         {
@@ -38,107 +31,197 @@ void StoreDashboard::deleteItem(bool isAdmin, string item)
     {
         return;
     }
-    for (auto i = inventory.begin(); i != inventory.end(); ++i)
+    for (auto i = inventory->begin(); i != inventory->end(); ++i)
     {
         if (i->isName(item))
         {
-            inventory.erase(i);
+            inventory->erase(i);
         }
     }
 }
-Item StoreDashboard::findItem(string item)
+Item* StoreDashboard::findItem(string item)
 {
-    for (auto i = inventory.begin(); i != inventory.end(); ++i)
+    for (auto i = inventory->begin(); i != inventory->end(); ++i)
     {
-        if (i->isName(item))
+        if (i->name == item)
         {
-            return *i;
+            return &*i;
         }
     }
-    return Item();
+    return NULL;
 }
+
+void StoreDashboard::addItem(bool isAdmin, Item item)
+{
+    if (!isAdmin)
+    {
+        return;
+    }
+    if (findItem(item.name) != NULL)
+    {
+        findItem(item.name)->quantity += item.quantity;
+    }
+    else
+    {
+        inventory->push_back(item);
+    }
+}
+
+
+
+double StoreDashboard::getRevenueTotal(vector<Sale> sales)
+{
+    double total = 0.0;
+    for (auto i = sales.begin(); i != sales.end(); ++i)
+    {
+        double item = i->price * i->quantity;
+        total += item;
+    }
+    return total;
+}
+
+double StoreDashboard::getMembersTotal(vector<Member> members)
+{
+    double total = 0.0;
+    for (auto i = members.begin(); i != members.end(); ++i)
+    {
+        total += i->total;
+    }
+    return total;
+}
+
 void StoreDashboard::addMember(bool isAdmin, Member member)
 {
     if (isAdmin)
     {
         return;
     }
-    members.push_back(member);
+    members->push_back(member);
 }
+
+Member* StoreDashboard::findMember(int member)
+{
+    for (auto i = members->begin(); i != members->end(); ++i)
+    {
+        if (i->isNumber(member))
+        {
+            return &*i;
+        }
+    }
+    return NULL;
+}
+
 void StoreDashboard::deleteMember(bool isAdmin, int member)
 {
     if (isAdmin)
     {
         return;
     }
-    for (auto i = members.begin(); i != members.end(); ++i)
+    for (auto i = members->begin(); i != members->end(); ++i)
     {
         if (i->isNumber(member))
         {
-            members.erase(i);
+            members->erase(i);
         }
     }
 }
+void StoreDashboard::addSale(Sale sale)
+{
+    int customer = sale.customer;
+    Member *member = findMember(customer);
+    sales->push_back(sale);
+    member->addPurchase(sale.price * sale.quantity);
+}
 
-void StoreDashboard::readDayFile(string fileName)
+int StoreDashboard::getExecutiveCount()
+{
+    int count = 0;
+    for (auto i = members->begin(); i != members->end(); ++i)
+    {
+        if (i->type == "Executive")
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+int StoreDashboard::getRegularCount()
+{
+    return members->size() - getExecutiveCount();
+}
+
+void StoreDashboard::readDayFile(QString fileName)
 {
 //    4/1/2021
 //    67890
 //    1 gallon milk
 //    6.49
 //    20
-    ifstream inFile;
-    inFile.open(fileName.c_str());
+    QFile inFile(fileName);
+
     int index = 0;
     Date date;
     int memberNumber;
     string name;
     double price;
     int quantity;
-    while(!inFile.eof())
+    if (inFile.open(QIODevice::ReadOnly))
     {
-        if (index == 0)
+        while(!inFile.atEnd())
         {
-            string month;
-            string day;
-            string year;
-            getline(inFile, month, '/');
-            getline(inFile, day, '/');
-            getline(inFile, year);
-            date = Date{stoi(month), stoi(day), stoi(year)};
-            index++;
-        }
-        else if (index == 1)
-        {
-            string memNum;
-            getline(inFile, memNum);
-            memberNumber = stoi(memNum);
-            index++;
-        }
-        else if (index == 2)
-        {
-            getline(inFile, name);
-            index++;
-        }
-        else if (index == 3)
-        {
-            string tempPrice;
-            getline(inFile, tempPrice);
-            price = stod(tempPrice);
-            index++;
-        }
-        else if (index == 4)
-        {
-            string tempQuant;
-            getline(inFile, tempQuant);
-            quantity = stoi(tempQuant);
-            Sale sale = Sale(date, memberNumber, name, price, quantity);
-            addSale(sale);
-            index = 0;
-        }
+            if (index == 0)
+            {
 
+                QString line = inFile.readLine().replace("\r\n", "");
+                if (line == " ")
+                {
+                    return;
+                }
+                QStringList list = line.split("/");
+                int month = stoi(list[0].toStdString());
+                int day = stoi(list[1].toStdString());
+                int year = stoi(list[2].toStdString());
+                date = Date{month,day ,year};
+                index++;
+            }
+            else if (index == 1)
+            {
+                QString line = inFile.readLine().replace("\r\n", "");
+                memberNumber = stoi(line.toStdString());
+                index++;
+            }
+            else if (index == 2)
+            {
+                QString line = inFile.readLine().replace("\r\n", "");
+                name = line.toStdString();
+                index++;
+            }
+            else if (index == 3)
+            {
+                QString line = inFile.readLine().replace("\t\r\n", "").replace("\r\n", "");
+                price = stod(line.toStdString());
+                index++;
+            }
+            else
+            {
+                QString line = inFile.readLine().replace("\r\n", "");
+                quantity = stoi(line.toStdString());
+                Sale sale = Sale(date, memberNumber, name, price, quantity);
+                addSale(sale);
+                Item item = Item(name, quantity, price * quantity, price);
+                addItem(true,item);
+                qDebug() << "SALE: " << QString::fromStdString(findMember(memberNumber)->name);
+                index = 0;
+            }
+
+        }
     }
-    inFile.close();
+    else{
+        qDebug() << "NO!!";
+    }
+        inFile.close();
+
 }
 
 void StoreDashboard::readMemberFile()
@@ -147,54 +230,55 @@ void StoreDashboard::readMemberFile()
 //    12897
 //    Executive
 //    12/15/2021
-    ifstream inFile;
-    inFile.open("warehouse-shoppers.txt");
+    QFile inFile(":/txt/warehouse-shoppers.txt");
+
     int index = 0;
     string name;
     int id;
-    int type;
+    string type;
     Date date;
-    while(!inFile.eof())
+    if (inFile.open(QIODevice::ReadOnly))
     {
-        if (index == 0)
+        while(!inFile.atEnd())
         {
-            getline(inFile, name);
-            index++;
-        }
-        else if (index == 1)
-        {
-            string tempId;
-            getline(inFile, tempId);
-            id = stoi(tempId);
-            index++;
-        }
-        else if (index == 2)
-        {
-            string tempType;
-            getline(inFile, tempType);
-            if (tempType == "Executive")
+            if (index == 0)
             {
-                type = 1;
+                name = inFile.readLine().replace("\r\n", "");
+                index++;
+            }
+            else if (index == 1)
+            {
+                string tempId;
+                tempId = inFile.readLine().replace("\r\n", "");
+                id = stoi(tempId);
+                index++;
+            }
+            else if (index == 2)
+            {
+                string tempType;
+                type = inFile.readLine().replace("\r\n", "");
+                index++;
             }
             else
             {
-                type = 0;
+                QString line = inFile.readLine();
+                if (line == " ")
+                {
+                    return;
+                }
+                QStringList list = line.split("/");
+                int month = stoi(list[0].toStdString());
+                int day = stoi(list[1].toStdString());
+                int year = stoi(list[2].replace("\r\n", "").toStdString());
+                date = Date{month,day ,year};
+                members->push_back(Member(name,id,type,date,0.0,0.0));
+                qDebug() << "MEMBER: " << QString::fromStdString(name);
+                qDebug() << "TYPE" << QString::fromStdString(type);
+                index = 0;
             }
-            index++;
-        }
-        else if (index == 3)
-        {
-            string month;
-            string day;
-            string year;
-            getline(inFile, month, '/');
-            getline(inFile, day, '/');
-            getline(inFile, year);
-            date = Date{stoi(month), stoi(day), stoi(year)};
-            Member member = Member(name, id, type, date, 0, 0);
-            addMember(true, member);
-            index = 0;
         }
     }
 }
+
+
 

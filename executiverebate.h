@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::ExecutiveRebate *ui;
+    void addTable();
 };
 
 #endif // EXECUTIVEREBATE_H
