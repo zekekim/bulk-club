@@ -19,6 +19,7 @@ SOURCES += \
     expiringmemberships.cpp \
     itemrevenue.cpp \
     login.cpp \
+    loginplaceholder.cpp \
     main.cpp \
     mainwindow.cpp \
     manageinventory.cpp \
@@ -35,7 +36,8 @@ HEADERS += \
     Member.h \
     Sale.h \
     StoreDashboard.h \
-    mainwindow.h
+    loginplaceholder.h \
+    mainwindow.h \
     createpurchase.h \
     executiverebate.h \
     expiringmemberships.h \
@@ -56,6 +58,7 @@ FORMS += \
     expiringmemberships.ui \
     itemrevenue.ui \
     login.ui \
+    loginplaceholder.ui \
     mainwindow.ui \
     manageinventory.ui \
     manageinventoryadd.ui \
