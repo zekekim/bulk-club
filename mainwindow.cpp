@@ -8,6 +8,7 @@
 #include "managemembers.h"
 #include "createpurchase.h"
 #include "manageinventory.h"
+#include "loginplaceholder.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -49,11 +50,10 @@ MainWindow::MainWindow(QWidget *parent)
     stackedWidget->setCurrentIndex(0);
 
     QStackedWidget *stackedWidget2 = ui->stackedWidget_2;
-//    Login *login = new Login(this);
-//    stackedWidget2->insertWidget(1, login);
+    LoginPlaceholder *login = new LoginPlaceholder(this);
+    stackedWidget2->insertWidget(1, login);
 
-//    stackedWidget2->setCurrentIndex(1);
-    stackedWidget2->setCurrentIndex(0);
+    stackedWidget2->setCurrentIndex(1);
 }
 
 MainWindow::~MainWindow()
