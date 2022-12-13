@@ -21,6 +21,7 @@ private slots:
     void on_comboBox_currentIndexChanged(int index);
 
 private:
+    void showEvent(QShowEvent* event);
     Ui::SalesReport *ui;
     void displayTable(vector<Sale> sales, StoreDashboard *store);
 };

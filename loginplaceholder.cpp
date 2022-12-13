@@ -1,7 +1,10 @@
 #include "loginplaceholder.h"
 #include "ui_loginplaceholder.h"
+#include "StoreDashboard.h"
 
 #include <QStackedWidget>
+
+int loginIndex = 0;
 
 LoginPlaceholder::LoginPlaceholder(QWidget *parent) :
     QWidget(parent),
@@ -17,8 +20,14 @@ LoginPlaceholder::~LoginPlaceholder()
 
 void LoginPlaceholder::on_pushButton_clicked()
 {
-    // <--- Do some login check here
-    // Redirect to main dashboard window
     ((QStackedWidget*)(this->parentWidget()))->setCurrentIndex(0);
+}
+
+
+void LoginPlaceholder::on_comboBox_currentIndexChanged(int index)
+{
+    loginIndex = index;
+    StoreDashboard *store = store->getInstance();
+    store->admin = loginIndex;
 }
 

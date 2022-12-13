@@ -16,6 +16,13 @@ MemberPurchases::~MemberPurchases()
     delete ui;
 }
 
+void MemberPurchases::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+    StoreDashboard *store = store->getInstance();
+    vector<Member> *members = store->members;
+    displayTable(*members, store);
+}
+
 void MemberPurchases::displayTable(vector<Member> members, StoreDashboard *store)
 {
     QTableWidget *table = ui->tableWidget;

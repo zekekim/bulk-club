@@ -22,6 +22,12 @@ ExpiringMemberships::ExpiringMemberships(QWidget *parent) :
     }
     setTable(members);
 }
+void ExpiringMemberships::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+    StoreDashboard *store = store->getInstance();
+    vector<Member> *members = store->members;
+    setTable(*members);
+}
 
 void ExpiringMemberships::setTable(vector<Member> members)
 {

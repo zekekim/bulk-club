@@ -15,6 +15,12 @@ ExecutiveRebate::~ExecutiveRebate()
     delete ui;
 }
 
+void ExecutiveRebate::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+    addTable();
+}
+
+
 void ExecutiveRebate::addTable()
 {
     QTableWidget *table = ui->tableWidget;

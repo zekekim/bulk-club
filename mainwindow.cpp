@@ -9,12 +9,21 @@
 #include "createpurchase.h"
 #include "manageinventory.h"
 #include "loginplaceholder.h"
+#include "StoreDashboard.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    StoreDashboard *store = store->getInstance();
+    if (store->admin == 0)
+    {
+        ui->pushButton_2->hide();
+        ui->pushButton_3->hide();
+        ui->pushButton_4->hide();
+    }
 
     QTabWidget *tabWidget = ui->tabWidget;
 
