@@ -21,7 +21,7 @@ public:
     vector<Item> *inventory;
     vector<Member> *members;
     vector<Sale> *sales;
-    int admin = 0;
+    bool admin = false;
     static StoreDashboard *getInstance() {
       if (!instance)
       instance = new StoreDashboard;
@@ -42,6 +42,7 @@ public:
     int getRegularCount();
     void readDayFile(QString fileName);
     void readMemberFile();
+    void setAdmin(int value);
 };
 
 #endif // STOREDASHBOARD_H

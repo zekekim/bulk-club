@@ -15,6 +15,13 @@ public:
     explicit ManageInventoryEdit(QWidget *parent = nullptr);
     ~ManageInventoryEdit();
 
+private slots:
+    void on_lineEdit_2_editingFinished();
+
+    void on_lineEdit_editingFinished();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::ManageInventoryEdit *ui;
 };

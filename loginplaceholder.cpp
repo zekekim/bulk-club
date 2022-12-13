@@ -28,6 +28,6 @@ void LoginPlaceholder::on_comboBox_currentIndexChanged(int index)
 {
     loginIndex = index;
     StoreDashboard *store = store->getInstance();
-    store->admin = loginIndex;
+    store->setAdmin(loginIndex);
 }
 

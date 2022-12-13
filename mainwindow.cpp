@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     StoreDashboard *store = store->getInstance();
-    if (store->admin == 0)
+    if (store->admin)
     {
         ui->pushButton_2->hide();
         ui->pushButton_3->hide();

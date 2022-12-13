@@ -129,7 +129,7 @@ void StoreDashboard::deleteMember(bool isAdmin, int member)
         }
         else
         {
-            ++i
+            ++i;
         }
     }
 }
@@ -288,5 +288,16 @@ void StoreDashboard::readMemberFile()
     }
 }
 
+void StoreDashboard::setAdmin(int value)
+{
+    if (value == 0)
+    {
+        admin = false;
+    }
+    if (value == 1)
+    {
+        admin = true;
+    }
+}
 
 

@@ -15,6 +15,11 @@ public:
     explicit ManageInventoryDelete(QWidget *parent = nullptr);
     ~ManageInventoryDelete();
 
+private slots:
+    void on_lineEdit_editingFinished();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::ManageInventoryDelete *ui;
 };
