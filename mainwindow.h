@@ -10,6 +10,8 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
 
+    Q_OBJECT
+
 public:
     Ui::MainWindow *ui;
     MainWindow(QWidget *parent = nullptr);
