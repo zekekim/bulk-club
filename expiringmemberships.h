@@ -20,6 +20,7 @@ private slots:
     void on_comboBox_currentIndexChanged(int index);
 
 private:
+    void showEvent(QShowEvent* event);
     Ui::ExpiringMemberships *ui;
     void setTable(vector<Member> members);
 };

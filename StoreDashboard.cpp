@@ -31,11 +31,15 @@ void StoreDashboard::deleteItem(bool isAdmin, string item)
     {
         return;
     }
-    for (auto i = inventory->begin(); i != inventory->end(); ++i)
+    for (auto i = inventory->begin(); i != inventory->end();)
     {
         if (i->isName(item))
         {
             inventory->erase(i);
+        }
+        else
+        {
+            ++i;
         }
     }
 }
@@ -117,11 +121,15 @@ void StoreDashboard::deleteMember(bool isAdmin, int member)
     {
         return;
     }
-    for (auto i = members->begin(); i != members->end(); ++i)
+    for (auto i = members->begin(); i != members->end();)
     {
         if (i->isNumber(member))
         {
             members->erase(i);
+        }
+        else
+        {
+            ++i
         }
     }
 }

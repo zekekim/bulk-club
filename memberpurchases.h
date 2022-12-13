@@ -23,6 +23,7 @@ private slots:
     void on_lineEdit_editingFinished();
 
 private:
+    void showEvent(QShowEvent* event);
     Ui::MemberPurchases *ui;
     void displayTable(vector<Member> members, StoreDashboard *store);
 };

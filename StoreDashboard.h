@@ -21,11 +21,13 @@ public:
     vector<Item> *inventory;
     vector<Member> *members;
     vector<Sale> *sales;
+    int admin = 0;
     static StoreDashboard *getInstance() {
       if (!instance)
       instance = new StoreDashboard;
       return instance;
     }
+
     void addSale(Sale sale);
     void addItem(bool isAdmin, Item item);
     void updateItem(bool isAdmin, string item, double price);

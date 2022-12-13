@@ -16,6 +16,13 @@ SalesReport::SalesReport(QWidget *parent) :
     displayTable(*sales, store);
 }
 
+void SalesReport::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+    StoreDashboard *store = store->getInstance();
+    vector<Sale> *sales = store->sales;
+    displayTable(*sales, store);
+}
+
 SalesReport::~SalesReport()
 {
     delete ui;

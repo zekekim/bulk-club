@@ -56,7 +56,7 @@ QPushButton {
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="item_name">
        <property name="placeholderText">
         <string>Enter Item Name to Add</string>
        </property>
@@ -73,7 +73,7 @@ QPushButton {
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="item_price">
        <property name="placeholderText">
         <string>Enter Price of Item</string>
        </property>
@@ -82,7 +82,7 @@ QPushButton {
     </layout>
    </item>
    <item alignment="Qt::AlignHCenter">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="add_item">
      <property name="maximumSize">
       <size>
        <width>250</width>

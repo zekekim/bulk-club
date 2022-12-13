@@ -16,6 +16,7 @@ public:
     ~ExecutiveRebate();
 
 private:
+    void showEvent(QShowEvent* event);
     Ui::ExecutiveRebate *ui;
     void addTable();
 };

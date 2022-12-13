@@ -56,7 +56,7 @@ QPushButton {
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="member_name">
        <property name="placeholderText">
         <string>Enter Member Name</string>
        </property>
@@ -83,14 +83,14 @@ QPushButton {
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="member_number">
        <property name="placeholderText">
         <string>Enter Member Number</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="type">
        <item>
         <property name="text">
          <string>Regular</string>
@@ -114,7 +114,7 @@ QPushButton {
       <number>200</number>
      </property>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="add_member">
        <property name="text">
         <string>Add</string>
        </property>
